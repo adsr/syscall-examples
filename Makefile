@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 
-my_cflags:=$(CFLAGS) -I./src/
+my_cflags:=$(CFLAGS) -D_GNU_SOURCE -D_XOPEN_SOURCE -I./src/
 all_sources:=$(wildcard src/*/*.c)
 all_examples:=$(patsubst %.c,%,$(all_sources))
 all_objects:=$(patsubst %.c,%.o,$(all_sources))
@@ -25,6 +25,6 @@ run: $(all_examples)
 	@for p in $(all_examples); do $$p; done
 
 clean:
-	rm -f $(all_examples) $(all_objects)
+	@rm -f $(all_examples) $(all_objects)
 
 .PHONY: all stubs run clean
